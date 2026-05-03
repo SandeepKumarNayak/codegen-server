@@ -1,6 +1,17 @@
 # AI Code Generator Backend
 
-This is the backend server for the AI Code Generator. It provides an Express-based API that interfaces with the Gemini AI model to generate, stream, and refine React code based on user prompts.
+## What is it?
+This is the backend server for the **AI Code Generator (Codegen)**. It is a robust, Express-based Node.js API that acts as the bridge between the frontend client and the AI models (like Gemini).
+
+## What does it do?
+It handles user requests to generate code, manages the context of the conversation (so you can ask the AI to modify existing code), and securely communicates with the AI APIs. Instead of waiting for the entire code block to be generated, it streams the AI's response back to the client in real-time, significantly reducing perceived latency.
+
+## How does it do it?
+1. **Request Handling:** It exposes a `POST /api/generate` endpoint that receives the user's natural language prompt, chosen framework, styling preferences, and any existing code context.
+2. **System Prompting:** It wraps the user's prompt with strict system instructions, ensuring the AI strictly returns valid React/Tailwind code without any conversational filler.
+3. **AI Streaming:** It connects to the Gemini AI API, receives the response as a stream of text chunks, and immediately forwards those chunks to the frontend using Server-Sent Events (SSE).
+
+---
 
 ## API Description
 
