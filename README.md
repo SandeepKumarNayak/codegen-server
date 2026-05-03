@@ -1,5 +1,7 @@
 # AI Code Generator Backend
 
+> **Project Overview**: The AI Code Generator is a full-stack application that acts as an AI pair programmer. It allows users to write natural language prompts to instantly generate, preview, and edit UI components (like React/Tailwind) in real-time. This document describes the backend service powering the application.
+
 ## What is it?
 This is the backend server for the **AI Code Generator (Codegen)**. It is a robust, Express-based Node.js API that acts as the bridge between the frontend client and the AI models (like Gemini).
 
@@ -59,3 +61,25 @@ sequenceDiagram
 - **Context Awareness**: The agent is fed the `currentCode` if available, allowing it to apply incremental modifications rather than rewriting from scratch.
 - **System Prompting**: Strong system instructions guide the agent to output ONLY valid React/Tailwind code without unnecessary markdown or conversational filler.
 - **Streaming Execution**: The agent's output is piped directly through an SSE stream to minimize perceived latency, giving the user immediate visual feedback.
+
+---
+
+## Setup Instructions
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Environment Variables**:
+   Copy `.env.example` to `.env` and configure your AI API keys.
+   ```env
+   PORT=3001
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+
+3. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+   The API will be available at `http://localhost:3001`.
