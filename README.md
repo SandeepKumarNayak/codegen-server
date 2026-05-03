@@ -4,18 +4,15 @@ This is the backend server for the AI Code Generator. It provides an Express-bas
 
 ## API Description
 
-### `POST /api/chat`
+### `POST /api/generate`
 This is the core endpoint responsible for processing user prompts and streaming AI-generated code back to the client.
 
 **Request Body:**
 ```json
 {
-  "messages": [
-    {
-      "role": "user",
-      "content": "Create a sleek login form using Tailwind."
-    }
-  ],
+  "prompt": "Create a sleek login form using Tailwind.",
+  "framework": "react",
+  "styling": "tailwind",
   "currentCode": "// Optional: The current code state to provide context for modifications"
 }
 ```
@@ -39,7 +36,7 @@ sequenceDiagram
     participant Agent as Gemini AI Agent
     participant ContextMgr as Context Manager
 
-    Client->>ExpressAPI: POST /api/chat (Prompt + currentCode)
+    Client->>ExpressAPI: POST /api/generate (Prompt + Framework + Styling + currentCode)
     ExpressAPI->>ContextMgr: Parse Request & Build System Prompt
     ContextMgr->>Agent: Send Instructions + History + Context
     Agent-->>ExpressAPI: Stream AI Response (Chunks)
